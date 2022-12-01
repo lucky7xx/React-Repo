@@ -17,7 +17,7 @@ function VideoComponent(props) {
     }
 
     const handlePause = () => {
-        console.log("Pause");
+        console.log("Pause clicked");
         videoRef.current.pause();
         setIsPlaying(false)
     }
