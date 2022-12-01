@@ -16,7 +16,7 @@ margin-left: 20px;
 export const ButtonDiv = styled.div`
 position: absolute;
 transform: translate(-50%,-50px);
-top: 70%;
+top: 50%;
 left: 45%;
 `
 

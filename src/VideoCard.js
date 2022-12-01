@@ -11,7 +11,7 @@ function VideoCard() {
 
             {VideoData.map((item, index) => {
                 return (
-                    <VideoComponent key={index} source={item.sources} />
+                    <VideoComponent key={index} source={item.sources} title={item.title} />
                 )
             })}
 
