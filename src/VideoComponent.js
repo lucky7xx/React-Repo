@@ -1,62 +1,63 @@
-import React, { useRef, useState } from 'react'
-import { ButtonDiv, ButtonStyle, VideoDiv } from './AppStyled';
-import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
+import React, { useRef, useState } from "react";
+import { ButtonDiv, ButtonStyle, VideoDiv, TitleStyle } from "./AppStyled";
+import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 
 function VideoComponent(props) {
+  const [displayButton, setDisplayButton] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
+  const videoRef = useRef();
 
-    const [displayButton, setDisplayButton] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
+  const handlePlay = () => {
+    console.log("play");
+    videoRef.current.play();
+    setIsPlaying(true);
+  };
 
-    const videoRef = useRef();
+  const handlePause = () => {
+    console.log("Pause clicked");
+    videoRef.current.pause();
+    setIsPlaying(false);
+  };
 
-    const handlePlay = () => {
-        console.log("play");
-        videoRef.current.play();
-        setIsPlaying(true)
-    }
+  const handleMouseEnter = () => {
+    // videoRef.current.play();
+    setDisplayButton(true);
+    console.log("Hello");
+  };
 
-    const handlePause = () => {
-        console.log("Pause clicked");
-        videoRef.current.pause();
-        setIsPlaying(false)
-    }
+  const handleMouseLeave = () => {
+    // videoRef.current.pause();
+    setDisplayButton(false);
+  };
 
-    const handleMouseEnter = () => {
-        setDisplayButton(true);
-        console.log("Hello");
-    }
+  return (
+    <VideoDiv onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      {displayButton ? (
+        <ButtonDiv>
+          {isPlaying === true ? (
+            <ButtonStyle onClick={handlePause}>
+              <AiFillPauseCircle style={{ fontSize: "50px" }} />
+            </ButtonStyle>
+          ) : (
+            <ButtonStyle onClick={handlePlay}>
+              <AiFillPlayCircle style={{ fontSize: "50px" }} />
+            </ButtonStyle>
+          )}
+        </ButtonDiv>
+      ) : null}
 
+      <video
+        src={props.source}
+        // muted='false'
+        height="150px"
+        width="300px"
+        ref={videoRef}
+      />
 
-    const handleMouseLeave = () => {
-        setDisplayButton(false);
-    }
-
-    return (
-        <VideoDiv
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
-
-            {displayButton ? (
-                <ButtonDiv>
-                    {isPlaying === true ? (<ButtonStyle onClick={handlePause}><AiFillPauseCircle style={{ fontSize: "20px" }} /></ButtonStyle>) : (<ButtonStyle onClick={handlePlay}><AiFillPlayCircle style={{ fontSize: "20px" }} /></ButtonStyle>)}
-                </ButtonDiv>
-            ) : null}
-
-            <video
-                src={props.source}
-                // muted='false'
-                height="150px"
-                width="300px"
-                ref={videoRef}
-            />
-
-            <h3>{props.title}</h3>
-
-
-        </VideoDiv>
-    )
+      <TitleStyle>{props.title}</TitleStyle>
+    </VideoDiv>
+  );
 }
 
-export default VideoComponent
+export default VideoComponent;
