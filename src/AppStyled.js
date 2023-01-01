@@ -9,7 +9,7 @@ export const VideoDataContainer = styled.div`
 
 export const ButtonStyle = styled.button`
   background-color: transparent;
-  margin-left: 20px;
+  margin-left: 19px;
   border: none;
   color: white;
 `;
